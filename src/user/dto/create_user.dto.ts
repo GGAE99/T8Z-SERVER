@@ -4,6 +4,9 @@ import { T_F_CHARACTER_NAME } from "../constant/user.tekken.character";
 
 export class CreateUserDto{
     @IsNotEmpty()
+    U_ID: string;
+
+    @IsNotEmpty()
     U_TYPE: string;
 
     @IsNotEmpty()

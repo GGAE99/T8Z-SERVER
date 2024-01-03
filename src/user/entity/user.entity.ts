@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryColumn, } from "typeorm";
 import { ROLE } from "../constant/user.role";
 import { USER_TYPE } from "../constant/user.type";
 import { T_F_CHARACTER_NAME } from "../constant/user.tekken.character";
@@ -31,7 +31,7 @@ export class User extends BaseEntity {
     U_FAVORITE_CHARACTER: T_F_CHARACTER_NAME; //string 대신 사용해도 괜찮나?
 
     @Column({type: 'date'})
-    U_CREATED: string;
+    U_CREATED: Date;
 
     @Column({type: 'varchar'})
     U_REFRESH_TOKEN: string;
