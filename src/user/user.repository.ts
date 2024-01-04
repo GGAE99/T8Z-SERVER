@@ -1,25 +1,24 @@
 import { Repository } from "typeorm";
 import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { CustomRepository } from "src/typeorm-ex.decorator";
-import { uuid } from "uuidv4";
-import * as bcrypt from 'bcrypt';
 import { User } from "./entity/user.entity";
 import { ROLE } from "./constant/user.role";
 import { UserErrorEnum } from "./error/user.error.enum";
 import { CreateUserDto } from "./dto/create_user.dto";
+import { SignInUserDto } from "./dto/signIn_user.dto";
 // import { UserLoginDto } from "./dto/user-login.dto";
 
 @CustomRepository(User)
 export class UserRepository extends Repository<User>{
-    async signup(
+
+    async signUp( // 회원 가입
         createUserDto: CreateUserDto,
     ) : Promise<void> {
-        const hashedPassword = await bcrypt.hash(createUserDto.U_PASSWORD, 10);
         const user = this.create({
             U_ID: createUserDto.U_ID,
             U_TYPE: createUserDto.U_TYPE,
             U_EMAIL: createUserDto.U_EMAIL,
-            U_PASSWORD: hashedPassword,
+            U_PASSWORD: createUserDto.U_PASSWORD,
             U_NAME: createUserDto.U_NAME,
             U_NICK: createUserDto.U_NICK,
             U_RANK: createUserDto.U_RANK,
@@ -35,5 +34,33 @@ export class UserRepository extends Repository<User>{
 
         await this.save(user);
         return null
+    }    
+
+    async getAllUsers(): Promise<User[]> {
+        const found = await this.find();
+        if (!found) {
+            throw new NotFoundException(UserErrorEnum.USER_NOT_FOUND);
+        }
+        return found;
+    }
+
+    async findByEmail( // eamil로 User 찾기
+        U_EMAIL: string,
+    ): Promise<User>{
+        const found = await this.findOne({
+            where: { 
+                U_EMAIL,
+            }
+        });
+        if (!found) {
+            throw new NotFoundException(UserErrorEnum.NO_FOUND_USER);
+        }
+        return found
+    }
+
+    async updateRefreshToken(U_EMAIL: string, refreshToken: string) {
+        const user = await this.findByEmail(U_EMAIL)
+        user.U_REFRESH_TOKEN = refreshToken;
+        await this.save(user);
     }
 }

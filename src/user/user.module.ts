@@ -3,16 +3,22 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { TypeOrmExModule } from 'src/typeorm-ex.module';
 import { UserRepository } from './user.repository';
-// import { UserRepository } from './user.repository';
+import { AuthService } from 'src/auth/auth.service';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
     TypeOrmExModule.forCustomRepository([UserRepository]),
-    // PassportModule.register({ defaultStrategy: 'jwt-access' }),
-    // JwtModule.register({}),
+    PassportModule.register({ defaultStrategy: 'jwt-access' }),
+    JwtModule.register({}),
   ],
 
   controllers: [UserController],
-  providers: [UserService]
+  providers: [
+    UserService,
+    AuthService,
+    JwtService,
+  ]
 })
 export class UserModule {}
