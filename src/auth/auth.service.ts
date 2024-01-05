@@ -6,7 +6,6 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
-import { SignInUserDto } from 'src/user/dto/signIn_user.dto';
 import { MyConfigType } from 'src/common/myconfig.type';
 
 @Injectable()
