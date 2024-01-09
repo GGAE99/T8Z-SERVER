@@ -6,6 +6,9 @@ import { configValidationSchema } from './common/config.schema';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { BoardController } from './board/board.controller';
+import { BoardService } from './board/board.service';
+import { BoardModule } from './board/board.module';
 
 @Module({
   imports: [
@@ -16,9 +19,10 @@ import { JwtModule } from '@nestjs/jwt';
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
     UserModule,
-    AuthModule
+    AuthModule,
+    BoardModule
   ],
-  controllers: [],
-  providers: [],
+  controllers: [BoardController],
+  providers: [BoardService],
 })
 export class AppModule {}

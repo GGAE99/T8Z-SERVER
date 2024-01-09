@@ -1,7 +1,8 @@
-import { BaseEntity, Column, Entity, PrimaryColumn, } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn, } from "typeorm";
 import { ROLE } from "../constant/user.role";
 import { USER_TYPE } from "../constant/user.type";
 import { T_F_CHARACTER_NAME } from "../constant/user.tekken.character";
+import { Board } from "src/board/entity/board.entity";
 
 
 @Entity()
@@ -38,4 +39,7 @@ export class User extends BaseEntity {
 
     @Column({ type: 'enum', enum: Object.values(ROLE) })
     U_ROLE: ROLE;
+
+    @OneToMany(() => Board, board => board.B_USER)
+    U_BOARDS: Board[];
 }
