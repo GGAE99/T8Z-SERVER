@@ -14,9 +14,10 @@ export class UserController {
     ){}
 
     @Post('signUp')
-    async signUp(
+    async signUp(        
         @Body() createUserDto: CreateUserDto,
     ): Promise<void> {
+        const test = 'ss'
         const defalutCreateUserDto = await this.userService.createUserDefaultInfo(createUserDto)
         await this.userService.signUp(defalutCreateUserDto)
     }
