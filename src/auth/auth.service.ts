@@ -17,12 +17,10 @@ export class AuthService {
     ) { }
 
     async logout(
-        { U_EMAIL, }: Partial<JwtPayloadWithRefreshToken>,
         response: Response,
     ): Promise<void> {
         response.clearCookie(CookieKeys.ACCESS_TOKEN);
         response.clearCookie(CookieKeys.REFRESH_TOKEN);
-        await this.userRepository.updateRefreshToken(U_EMAIL, null);
     }
 
     async refreshAccessToken(

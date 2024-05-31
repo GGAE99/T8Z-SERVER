@@ -7,7 +7,7 @@ export class BoardComment extends BaseEntity {
     BC_ID: number;
     
     @Column({type:'text', length:255})
-    BC_CONTENT: Text;
+    BC_CONTENT: string;
 
     @ManyToOne(() => Board, board => board.B_COMMENTS) // User 엔터티와의 관계 설정
     @JoinColumn({ name: 'B_ID' })

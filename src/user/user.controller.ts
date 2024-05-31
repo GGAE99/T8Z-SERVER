@@ -13,16 +13,25 @@ export class UserController {
         private readonly userService: UserService,
     ){}
 
-    @Post('signUp')
+    // 회원가입
+    @Post('users')
     async signUp(        
         @Body() createUserDto: CreateUserDto,
     ): Promise<void> {
-        const test = 'ss'
         const defalutCreateUserDto = await this.userService.createUserDefaultInfo(createUserDto)
         await this.userService.signUp(defalutCreateUserDto)
     }
 
-    @Post('signIn')
+    // 모든 회원 조회
+    @UseGuards(AccessTokenGuard)
+    @Get('users')
+    async getAllUsers(        
+    ): Promise<User[]> {
+        return await this.userService.getAllUsers();
+    }
+
+    // 로그인
+    @Post('sessions')
     async signIn(
         @Body() signinUserDto: SignInUserDto,
         @Res({ passthrough: true }) response: Response,
@@ -30,22 +39,16 @@ export class UserController {
         await this.userService.singIn(signinUserDto, response)
     }
 
+    // 로그아웃
     @UseGuards(RefreshTokenGuard)
-    @Get('logout')
+    @Get('sessions')
     async logout(
-        @Req() request: Request,
         @Res({ passthrough: true }) response: Response,
     ): Promise<void>{
-        return await this.userService.logout(request, response)
+        return await this.userService.logout(response)
     }
-
-    @UseGuards(AccessTokenGuard)
-    @Get('getAllUser')
-    async getAllUsers(        
-    ): Promise<User[]> {
-        return await this.userService.getAllUsers();
-    }
-
+    
+    // AT 재발급
     @UseGuards(RefreshTokenGuard)
     @Get('refresh')
     async refresh(
@@ -54,6 +57,5 @@ export class UserController {
     ): Promise<void> {
         return await this.userService.refreshAccessToken(request, response);
     }
-
 
 }

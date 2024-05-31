@@ -32,7 +32,7 @@ export class UserService {
         const match = await bcrypt.compare(signInUserDto.U_PASSWORD, user.U_PASSWORD);
 
         if (user && match) {            
-            const tokens = await this.authService.getTokens(user.U_EMAIL);            
+            const tokens = await this.authService.getTokens(user.U_EMAIL);
             await this.authService.updateRefreshToken(user.U_EMAIL, tokens.refreshToken);
             return this.authService.setTokensToCookie(response, tokens);
         }else{
@@ -40,17 +40,15 @@ export class UserService {
         }
     }
 
-    async getAllUsers(  // 모든 회원 가져오기 / 꼭 지워야함
+    async getAllUsers(  // 모든 회원 가져오기
     ): Promise<User[]> {
         return await this.userRepository.getAllUsers();
     }
 
     async logout(
-        request,
         response: Response
     ): Promise<void>{
-        console.log(request.user)
-        return await this.authService.logout(request.user, response)
+        return await this.authService.logout(response)
     }
 
     async refreshAccessToken(
