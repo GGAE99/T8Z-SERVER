@@ -7,8 +7,6 @@ export interface JwtPayload {
   U_EMAIL: string;
 }
 
-
-
 export enum CookieKeys {
   ACCESS_TOKEN = 'T8ZAppAT',
   REFRESH_TOKEN = 'T8ZAppRT',

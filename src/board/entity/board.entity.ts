@@ -19,13 +19,13 @@ export class Board extends BaseEntity {
     @Column({type:'varchar', enum: Object.values(B_TYPE)})
     B_TYPE: B_TYPE;
 
-    @Column({type:'int', length: 11})
+    @Column({type:'int'})
     B_LIKE: number;
 
-    @Column({type:'int', length: 11})
+    @Column({type:'int'})
     B_UNLIKE: number;
 
-    @Column({type:'int', length: 3})
+    @Column({type:'int'})
     B_FILE_COUNT: number;
 
     @Column({type:'date'})
@@ -34,10 +34,10 @@ export class Board extends BaseEntity {
     @Column({type:'date'})
     B_UPDATED: Date;
 
-    @Column({type:'int', length: 3})
+    @Column({type:'int'})
     B_COMMENT_COUNT: number;
 
-    @Column({type:'int', length: 3})
+    @Column({type:'int'})
     B_REPORTED_COUNT: number;    
 
     @ManyToOne(() => User, user => user.U_BOARDS) // User 엔터티와의 관계 설정
