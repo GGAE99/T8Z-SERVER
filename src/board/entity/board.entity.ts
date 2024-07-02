@@ -8,7 +8,7 @@ import { BoardComment } from "./board_comment.entity";
 @Entity()
 export class Board extends BaseEntity {
     @PrimaryColumn({ type: 'varchar', length: 30 })
-    B_ID: number;
+    B_ID: string;
 
     @Column({type:'varchar', length:100})
     B_HEAD: string;
