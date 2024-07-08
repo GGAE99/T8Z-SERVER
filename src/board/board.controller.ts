@@ -3,6 +3,7 @@ import { AccessTokenGuard } from 'src/auth/guard/accessToken.guard';
 import { BoardService } from './board.service';
 import { Board } from './entity/board.entity';
 import { CreateBoardDto } from './dto/create_board.dto';
+import { UpdateBoardDto } from './dto/update_board.dto';
 
 @UseGuards(AccessTokenGuard)
 @Controller('board')
@@ -12,10 +13,9 @@ export class BoardController {
     ){}
 
     @Get('board')
-    async getBoardByDay(
-        @Req() req: Request,
+    async getAllBoard(
     ) : Promise<Board[]> {
-        return await this.boardService.getBoardByDay(req);
+        return await this.boardService.getAllBoard();
     }
 
     @Post('board')
