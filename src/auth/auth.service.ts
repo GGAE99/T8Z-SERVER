@@ -1,12 +1,12 @@
 import { ForbiddenException, Injectable, Res, UnauthorizedException } from '@nestjs/common';
 import { CookieKeys, JwtPayload, JwtPayloadWithRefreshToken, Tokens } from './constant/auth.type';
-import { AUTH_ERROR_MESSAGE } from './Error/auth.error.enum';
+import { AUTH_ERROR_MESSAGE } from '../common/error/auth.error.enum';
 import { UserRepository } from 'src/user/user.repository';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
-import { MyConfigType } from 'src/common/myconfig.type';
+import { MyConfigType } from 'src/common/config/myconfig.type';
 
 @Injectable()
 export class AuthService {

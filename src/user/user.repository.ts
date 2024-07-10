@@ -3,7 +3,7 @@ import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { CustomRepository } from "src/typeorm-ex.decorator";
 import { User } from "./entity/user.entity";
 import { ROLE } from "./constant/user.role";
-import { UserErrorEnum } from "./error/user.error.enum";
+import { USER_ERROR_ENUM } from "../common/error/user.error.enum";
 import { CreateUserDto } from "./dto/create_user.dto";
 import { SignInUserDto } from "./dto/signIn_user.dto";
 // import { UserLoginDto } from "./dto/user-login.dto";
@@ -29,7 +29,7 @@ export class UserRepository extends Repository<User>{
         });
 
         if (!user) {
-            throw new BadRequestException(UserErrorEnum.SIGN_UP_ERROR);
+            throw new BadRequestException(USER_ERROR_ENUM.SIGN_UP_ERROR);
         }
 
         await this.save(user);
@@ -39,7 +39,7 @@ export class UserRepository extends Repository<User>{
     async getAllUsers(): Promise<User[]> {
         const found = await this.find();
         if (!found) {
-            throw new NotFoundException(UserErrorEnum.USER_NOT_FOUND);
+            throw new NotFoundException(USER_ERROR_ENUM.USER_NOT_FOUND);
         }
         return found;
     }
@@ -53,7 +53,7 @@ export class UserRepository extends Repository<User>{
             }
         });
         if (!found) {
-            throw new NotFoundException(UserErrorEnum.NO_FOUND_USER);
+            throw new NotFoundException(USER_ERROR_ENUM.NO_FOUND_USER);
         }
         return found
     }

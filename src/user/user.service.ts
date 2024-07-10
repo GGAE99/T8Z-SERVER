@@ -8,8 +8,8 @@ import { SignInUserDto, } from './dto/signIn_user.dto';
 import * as bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import { AuthService } from 'src/auth/auth.service';
-import { AUTH_ERROR_MESSAGE } from 'src/auth/Error/auth.error.enum';
 import { User } from './entity/user.entity';
+import { AUTH_ERROR_MESSAGE } from 'src/common/error/auth.error.enum';
 
 @Injectable()
 export class UserService {

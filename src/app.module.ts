@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeOrmConfig } from './common/typeorm.config';
-import { configValidationSchema } from './common/config.schema';
+import { typeOrmConfig } from './common/config/typeorm.config';
+import { configValidationSchema } from './common/config/config.schema';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
@@ -22,7 +22,7 @@ import { BoardModule } from './board/board.module';
     AuthModule,
     BoardModule
   ],
-  controllers: [BoardController],
-  providers: [BoardService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

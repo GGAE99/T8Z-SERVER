@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
 import { User } from 'src/user/entity/user.entity';
 import { CookieKeys, JwtPayload } from '../constant/auth.type';
-import { MyConfigType } from 'src/common/myconfig.type';
+import { MyConfigType } from 'src/common/config/myconfig.type';
 import { UserService } from 'src/user/user.service';
 
 @Injectable()
