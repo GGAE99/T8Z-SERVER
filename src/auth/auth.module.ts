@@ -7,6 +7,7 @@ import { UserRepository } from 'src/user/user.repository';
 import { AccessTokenStrategy } from './strategy/accessToken.strategy';
 import { RefreshTokenStrategy } from './strategy/refreshToken.strategy';
 import { UserService } from 'src/user/user.service';
+import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
@@ -22,5 +23,6 @@ import { UserService } from 'src/user/user.service';
     RefreshTokenStrategy,
   ],
   exports: [AuthService],
+  controllers: [AuthController],
 })
 export class AuthModule { }

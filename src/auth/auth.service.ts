@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, Injectable, Res, UnauthorizedException } from '@nestjs/common';
 import { CookieKeys, JwtPayload, JwtPayloadWithRefreshToken, Tokens } from './constant/auth.type';
 import { AUTH_ERROR_MESSAGE } from './Error/auth.error.enum';
 import { UserRepository } from 'src/user/user.repository';
@@ -17,11 +17,12 @@ export class AuthService {
     ) { }
 
     async logout(
-        response: Response,
+        @Res({ passthrough: true }) response: Response,
     ): Promise<void> {
         response.clearCookie(CookieKeys.ACCESS_TOKEN);
         response.clearCookie(CookieKeys.REFRESH_TOKEN);
     }
+
 
     async refreshAccessToken(
         { U_EMAIL, refreshToken, }: Partial<JwtPayloadWithRefreshToken>,
